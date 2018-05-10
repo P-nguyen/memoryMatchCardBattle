@@ -1,19 +1,26 @@
-function Card(_cardName, _effect) {
-    this.name = _cardName;
-    this.effect = _effect;
-    this.flipped = false; // this is currently not flipped
-
-    // this.flipCardToFront = function () {
-    //     $(this).addClass('revealed');
-    //     this.flipped = true;
-    // };
-    // this.createCard = function () {
-    //     //this will create random card with random card class.
-    // };
-    // this.addID = function () {
-    //
-    // };
-    // this.removeID = function () {
-    //
-    // };
-}
+var cardName = {
+    0: {name: 'attack',
+        address:'images/FrontFaces/AttackCard.jpg',
+        effect: ''},
+    1: {name: 'shield',
+        address:'images/finalfantasyImages/bomb.jpg' ,
+        effect: ''},
+    2: {name: 'terra',
+        address:'images/finalfantasyImages/terra.jpg' ,
+        effect: ''},
+    3: {name: 'edgar',
+        address:'images/finalfantasyImages/edgar.jpg' ,
+        effect: ''},
+    4: {name: 'darkKnight',
+        address: 'images/finalfantasyImages/darkKnight.jpg',
+        effect: ''},
+    5: {name: 'king',
+        address: 'images/finalfantasyImages/king.jpg',
+        effect: ''},
+    6: {name: 'terra2',
+        address: 'images/finalfantasyImages/terra2.jpg',
+        effect: ''},
+    7: {name: 'ramuth',
+        address: 'images/finalfantasyImages/ramuth.jpg',
+        effect: ''},
+};

@@ -11,8 +11,7 @@ var games_played = 0;
 
 function initiateGame() {
     addEventHandler();
-    //addCardsToGameArea();
-    addObjectToCard();
+    addImageAddressToCard();
 }
 
 function addEventHandler() {
@@ -20,48 +19,25 @@ function addEventHandler() {
     $('.reset').on('click', resetGame);
 }
 
+function randomizeCardOrderArr(){
+    var newArrayOrder = [];
+    var cardOrderLength = cardOrder.length-1;
 
-function addObjectToCard() {
-    // var cards = $('.card');
-    //     for (var i = 0; i< cards.length; i++) {
-    //         $(cards[i]).data(new Card(cardOrder[i]));
-    //     }
-    //debugger;
-    var cards = $('.card > .back');
-    for (var i = 0; i< cards.length; i++) {
-        $(cards[i]).addClass(cardName[cardOrder[i]].name);
-        $(cards[i]).attr('id', cardName[cardOrder[i]].name )
+    while(newArrayOrder.length <= cardOrderLength){
+        var rndNumber = Math.floor(Math.random()*cardOrder.length);
+
+        newArrayOrder.push(cardOrder[rndNumber]);
+        cardOrder.splice([rndNumber],1);
     }
+    cardOrder = newArrayOrder;
 }
 
-var cardName = {
-    0: {name: 'attack', effect: ''},
-    1: {name: 'shield', effect: ''},
-    2: {name: 'terra', effect: ''},
-    3: {name: 'edgar', effect: ''},
-    4: {name: 'darkKnight', effect: ''},
-    5: {name: 'king', effect: ''},
-    6: {name: 'terra2', effect: ''},
-    7: {name: 'ramuth', effect: ''},
-    };
-
-// function addCardsToGameArea() {
-//     var rowContainer = $('<div class="row"></div>');
-//         for (var i = 0; i < 3; i++) {
-//             var cardContainer = $('<div class="cardContainer"></div>');
-//             var card = $('<div class="card"></div>');
-//             $(cardContainer).append(card);
-//             $(card).append($('<div class="back">'));
-//             $(card).append($('<div class="front">'));
-//
-//             rowContainer.append(cardContainer);
-//
-//             // cards['div'+i] = new Card('div'+i, i, card);//make card obj CHECKOUT LATER
-//             // $(card).addClass('div'+i);
-//            }
-//         $('.game-area').append(rowContainer);
-// }
-
+function addImageAddressToCard() {
+    var cards = $('.card > .back');
+    for (var i = 0; i< cards.length; i++) {
+        $(cards[i]).attr('src', cardName[cardOrder[i]].address)//<img>
+    }
+}
 
 function flipCardToFront() {
     //if both cards 'flipped' property is true, then get outta here.
@@ -84,7 +60,7 @@ function flipCardToFront() {
         currentCard.addClass('revealed'); // reveal the current card by adding class.
         attempt_counter++; //increments attempts since this is the second card.
 
-        if (first_card_clicked["0"].children["0"].id === second_card_clicked["0"].children["0"].id){
+        if ($(first_card_clicked).find('img').attr('src') === $(second_card_clicked).find('img').attr('src')){
             match_counter++;
             resetFirstandSecondCardVar();
             checkWinCondition();
@@ -140,4 +116,18 @@ function resetGame() {
     $('.games-played .value').text(games_played);
 
     //reset game.
+    //flip all cards
+    flipAllCardsOver();
+    //randomize all cards
+    randomizeCardOrderArr();
+    setTimeout(addImageAddressToCard, 300);
+    
+}
+
+function flipAllCardsOver(){
+    var allCards = $('.card');
+    for (var i = 0; i < allCards.length; i++){
+        $(allCards[i]).removeClass('revealed');
+    }
+
 }

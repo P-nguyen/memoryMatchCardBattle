@@ -1,5 +1,6 @@
-function Card(_cardName) {
+function Card(_cardName, _effect) {
     this.name = _cardName;
+    this.effect = _effect;
     this.flipped = false; // this is currently not flipped
 
     // this.flipCardToFront = function () {

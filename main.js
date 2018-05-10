@@ -22,12 +22,28 @@ function addEventHandler() {
 
 
 function addObjectToCard() {
-    var cards = $('.card');
-        for (var i = 0; i< cards.length; i++) {
-            $(cards[i]).data(new Card(cardOrder[i]));
-        }
+    // var cards = $('.card');
+    //     for (var i = 0; i< cards.length; i++) {
+    //         $(cards[i]).data(new Card(cardOrder[i]));
+    //     }
+    //debugger;
+    var cards = $('.card > .back');
+    for (var i = 0; i< cards.length; i++) {
+        $(cards[i]).addClass(cardName[cardOrder[i]].name);
+        $(cards[i]).attr('id', cardName[cardOrder[i]].name )
+    }
 }
-//var cards = {};
+
+var cardName = {
+    0: {name: 'attack', effect: ''},
+    1: {name: 'shield', effect: ''},
+    2: {name: 'terra', effect: ''},
+    3: {name: 'edgar', effect: ''},
+    4: {name: 'darkKnight', effect: ''},
+    5: {name: 'king', effect: ''},
+    6: {name: 'terra2', effect: ''},
+    7: {name: 'ramuth', effect: ''},
+    };
 
 // function addCardsToGameArea() {
 //     var rowContainer = $('<div class="row"></div>');
@@ -49,27 +65,32 @@ function addObjectToCard() {
 
 function flipCardToFront() {
     //if both cards 'flipped' property is true, then get outta here.
-    if ($(first_card_clicked).data('flipped') === true && $(second_card_clicked).data('flipped') === true){
-        return;
+    //false means the cardback is showing.
+    //debugger;
+    //_jQueryelement.hasClass('revealed')
+    if (first_card_clicked != null && second_card_clicked != null){
+        if (first_card_clicked.hasClass('revealed') === true && second_card_clicked.hasClass('revealed') === true){
+            console.log('exiting!')
+            return;
+        }
     }
 
     var currentCard = $(this);
-    currentCard.addClass('revealed');
-    if (first_card_clicked === null && currentCard.data('flipped') === false){
+    if (first_card_clicked === null && currentCard.hasClass('revealed')=== false){
         first_card_clicked = currentCard;
-        currentCard.data('flipped',true)
-    }else if (currentCard.data('flipped')=== false){
+        currentCard.addClass('revealed'); // reveal the current card by adding class.
+        //currentCard.data('flipped',true)
+    }else if (currentCard.hasClass('revealed')=== false){
         second_card_clicked = currentCard;
+        currentCard.addClass('revealed'); // reveal the current card by adding class.
         attempt_counter++; //increments attempts since this is the second card.
-
-        if ($(first_card_clicked).data('name') === $(second_card_clicked).data('name')){
+        //debugger;
+        if (first_card_clicked["0"].children["0"].id === second_card_clicked["0"].children["0"].id){
             match_counter++;
-            $(second_card_clicked).data('flipped',true)
             resetFirstandSecondCardVar();
             checkWinCondition();
         }else{
-            $(second_card_clicked).data('flipped',true)
-            setTimeout(function(){flipCardToBack(first_card_clicked,second_card_clicked)}, 1000);
+            setTimeout(function(){flipCardToBack(first_card_clicked, second_card_clicked)}, 1000);
         }
     }else{
         console.log('you clicked this already!');
@@ -99,10 +120,9 @@ function reset_stats(){
 function flipCardToBack(jQueryElement1,jQueryElement2) {
     $(jQueryElement1).removeClass('revealed');
     $(jQueryElement2).removeClass('revealed');
-    $(jQueryElement1).data('flipped',false)
-    $(jQueryElement2).data('flipped',false)
     resetFirstandSecondCardVar();
 }
+
 function resetFirstandSecondCardVar() {
     first_card_clicked = null;
     second_card_clicked = null;

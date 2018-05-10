@@ -63,31 +63,37 @@ function flipCardToFront() {
         attempt_counter++; //increments attempts since this is the second card.
 
         if ($(first_card_clicked).data('name') === $(second_card_clicked).data('name')){
-            matchCounter();
+            match_counter++;
             $(second_card_clicked).data('flipped',true)
             resetFirstandSecondCardVar();
             checkWinCondition();
         }else{
-            accuracyCounter();
             $(second_card_clicked).data('flipped',true)
             setTimeout(function(){flipCardToBack(first_card_clicked,second_card_clicked)}, 1000);
         }
     }else{
         console.log('you clicked this already!');
     }
+    display_stats();
 }
 
-function matchCounter(){
-    match_counter++;
+function display_stats(){
     $('.matches .value').text(match_counter);
-    accuracyCounter();
-}
 
-function accuracyCounter() {
     var accuracyPercent = match_counter/attempt_counter;
     accuracyPercent = accuracyPercent.toFixed(2);
+    if (isNaN(accuracyPercent)){
+        accuracyPercent = 0;
+    }
+
     $('.accuracy .value').text(accuracyPercent + '%');
     $('.attempts .value').text(attempt_counter);
+}
+
+function reset_stats(){
+    $('.accuracy .value').text('0%');
+    $('.attempts .value').text('0');
+    $('.matches .value').text('0');
 }
 
 function flipCardToBack(jQueryElement1,jQueryElement2) {
@@ -109,5 +115,10 @@ function checkWinCondition() {
 }
 
 function resetGame() {
+    reset_stats();
+    display_stats();
     games_played++;
+    $('.games-played .value').text(games_played);
+
+    //reset game.
 }

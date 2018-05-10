@@ -79,12 +79,11 @@ function flipCardToFront() {
     if (first_card_clicked === null && currentCard.hasClass('revealed')=== false){
         first_card_clicked = currentCard;
         currentCard.addClass('revealed'); // reveal the current card by adding class.
-        //currentCard.data('flipped',true)
     }else if (currentCard.hasClass('revealed')=== false){
         second_card_clicked = currentCard;
         currentCard.addClass('revealed'); // reveal the current card by adding class.
         attempt_counter++; //increments attempts since this is the second card.
-        //debugger;
+
         if (first_card_clicked["0"].children["0"].id === second_card_clicked["0"].children["0"].id){
             match_counter++;
             resetFirstandSecondCardVar();

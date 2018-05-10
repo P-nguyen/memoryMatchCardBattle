@@ -73,7 +73,7 @@ li{
 }
 .cardContainer{
     height: 200px;
-    width: 150px;
+    width: 115px;
     background-color: red;
     display: inline-block;
 }
@@ -90,6 +90,10 @@ li{
     position: absolute;
     height: 100%;
     width: 100%;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-color: #414042;
 }
 .front{
     background-color: #1b6d85;

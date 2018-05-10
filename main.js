@@ -3,8 +3,11 @@ $().ready(initiateGame);
 //global variables
 var first_card_clicked =null;
 var second_card_clicked = null;
-var total_possible_matches = 2;//number of total possible matches (in this case 2)
+var cardOrder = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7];
+var total_possible_matches = cardOrder.length/2;//number of total possible matches (in this case 2)
 var match_counter = 0;
+var attempt_counter = 0;
+var games_played = 0;
 
 function initiateGame() {
     addEventHandler();
@@ -14,9 +17,9 @@ function initiateGame() {
 
 function addEventHandler() {
     $('.game-area').on('click', '.card', flipCardToFront);
+    $('.reset').on('click', resetGame);
 }
 
-var cardOrder = [0,0,1,1]
 
 function addObjectToCard() {
     var cards = $('.card');
@@ -57,19 +60,34 @@ function flipCardToFront() {
         currentCard.data('flipped',true)
     }else if (currentCard.data('flipped')=== false){
         second_card_clicked = currentCard;
+        attempt_counter++; //increments attempts since this is the second card.
 
         if ($(first_card_clicked).data('name') === $(second_card_clicked).data('name')){
-            match_counter++;
+            matchCounter();
             $(second_card_clicked).data('flipped',true)
             resetFirstandSecondCardVar();
             checkWinCondition();
         }else{
+            accuracyCounter();
             $(second_card_clicked).data('flipped',true)
             setTimeout(function(){flipCardToBack(first_card_clicked,second_card_clicked)}, 1000);
         }
     }else{
         console.log('you clicked this already!');
     }
+}
+
+function matchCounter(){
+    match_counter++;
+    $('.matches .value').text(match_counter);
+    accuracyCounter();
+}
+
+function accuracyCounter() {
+    var accuracyPercent = match_counter/attempt_counter;
+    accuracyPercent = accuracyPercent.toFixed(2);
+    $('.accuracy .value').text(accuracyPercent + '%');
+    $('.attempts .value').text(attempt_counter);
 }
 
 function flipCardToBack(jQueryElement1,jQueryElement2) {
@@ -88,4 +106,8 @@ function checkWinCondition() {
     if (match_counter===total_possible_matches){
         console.log('WINNER WINNER CHICKEN DINNER');
     }
+}
+
+function resetGame() {
+    games_played++;
 }

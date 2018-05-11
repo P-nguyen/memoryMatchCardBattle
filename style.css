@@ -1,5 +1,7 @@
 body{
     font-size: 0;
+    background: url('images/finalfantasyImages/FFVI_Background.jpg');
+    background-size: cover;
 }
 
 .game-logo{
@@ -57,14 +59,14 @@ li{
     height: 85vh;
     display: inline-block;
     vertical-align: top;
-    background-color: #6a6969;
+    #background-color: #6a6969;
 }
 
 .game-area{
     display: inline-block;
     width: 60%;
     height: 85vh;
-    background-color: #fffabe;
+    #background-color: #fffabe;
 }
 
 .row{
@@ -73,22 +75,22 @@ li{
     justify-content: space-evenly;
 }
 .cardContainer{
-    perspective: 100px;
-    height: 200px;
+    height: 200px; /*fix this eventually*/
     width: 115px;
-    background-color: red;
     display: inline-block;
     perspective: 1000px;
 }
 .card {
     height: 80%;
     width: 80%;
-    background-color: chartreuse;
     position: relative;
     top: 10%;
     left: 10%;
 }
 
+.card:hover {
+    transform: scale(1.2);
+}
 .back, .front {
     position: absolute;
     height: 100%;
@@ -97,19 +99,18 @@ li{
     border-style: solid;
     border-width: thin;
     border-color: #414042;
-    #backface-visibility: hidden; /* this makes the backface of the elem invisible*/
 }
 .front{
-    background-color: #1b6d85;
-    #transform: rotateY(0deg);
+    background: url('images/Cards/cardBack.jpg');
+    background-size: 100% 100%;
+
 }
 .back{
-    background-color: pink;
-    transform: rotateY(180deg);
+    transform: rotateY(180deg);/*flip at beginning so when triggered it will flip correctly by flipper*/
 }
 
 .card.revealed.flipper{
-    transform: rotateY(180deg)
+    transform: rotateY(180deg)/* once reveal is added to card it will trigger this and flip it*/
 }
 
 .flipper {

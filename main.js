@@ -3,7 +3,7 @@ $().ready(initiateGame);
 //global variables
 var first_card_clicked =null;
 var second_card_clicked = null;
-var cardOrder = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7];
+var cardOrder = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
 var total_possible_matches = cardOrder.length/2;//number of total possible matches (in this case 2)
 var match_counter = 0;
 var attempt_counter = 0;
@@ -65,7 +65,7 @@ function flipCardToFront() {
             resetFirstandSecondCardVar();
             checkWinCondition();
         }else{
-            setTimeout(function(){flipCardToBack(first_card_clicked, second_card_clicked)}, 1000);
+            setTimeout(flipCardToBack, 1000, first_card_clicked, second_card_clicked);
         }
     }else{
         console.log('you clicked this already!');

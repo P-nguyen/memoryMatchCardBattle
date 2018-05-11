@@ -1,0 +1,11 @@
+Cards
+
+1) Attack
+2) Attack
+3) Defend
+4) Double Strike - 2x multiplier
+5) Double Strike - 2x multiplier
+6) Triple Strike - 3x multiplier
+7) Triple Strike - 3x multiplier
+8) Heal
+9) Bahamut - damage all players.

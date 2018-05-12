@@ -4,11 +4,14 @@ $().ready(initiateGame);
 var first_card_clicked =null;
 var second_card_clicked = null;
 var cardOrder = ['attack','attack','shield','bahamut','doubleStrike','tripleStrike','heal','doubleStrike','tripleStrike'];
+//old.
 var total_possible_matches = cardOrder.length/2;//number of total possible matches (in this case 2)
 var match_counter = 0;
 var attempt_counter = 0;
 var games_played = 0;
+
 var currentPlayer = true; //true is player 1
+var screenClickable = true;
 
 function initiateGame() {
     addEventHandler();
@@ -43,12 +46,12 @@ function addImageAddressToCard() {
 
 function flipCardToFront() {
     var cardType = null;
-    if (first_card_clicked != null && second_card_clicked != null){
-        if (first_card_clicked.hasClass('revealed') === true && second_card_clicked.hasClass('revealed') === true){
-            console.log('exiting!')
-            return;
-        }
+
+    if (!screenClickable){ // if false then exit// it starts true.
+        console.log('exiting!')
+        return;
     }
+
 
     var currentCard = $(this);
     if (first_card_clicked === null && currentCard.hasClass('revealed')=== false){
@@ -56,14 +59,14 @@ function flipCardToFront() {
         // here we check card ability
         cardType = checkCardName($(currentCard).find('img').attr('src'));
         if (cardType != 'attack') {
-
+            screenClickable = !screenClickable;
             if(cardType === 'bahamut'){
                 console.log('ITs BAHAMUT!');
-                setTimeout(resetDeck, 2000);
+                setTimeout(resetDeck, 2000); // this sets a reset for entire deck.
                 //do damange to both players
             }
             //if its bahamut reset deck., if it can be stored it will be.
-            setTimeout(displayCard, 1000, $(currentCard).find('img').attr('src'));
+            setTimeout(displayCard, 1000, $(currentCard).find('img').attr('src')); //this will display a card.
 
             return
         }
@@ -71,6 +74,7 @@ function flipCardToFront() {
         first_card_clicked = currentCard;
 
     }else if (currentCard.hasClass('revealed')=== false){
+        screenClickable = !screenClickable; // turn off clickablity
         second_card_clicked = currentCard;
         currentCard.addClass('revealed'); // reveal the current card by adding class.
         attempt_counter++; //increments attempts since this is the second card.
@@ -174,6 +178,8 @@ function displayCard(_inputCardSrc){
 }
 
 function currentPlayerPositionNotification(){
+    screenClickable = !screenClickable;// allows player to click again afterwards.
+
     if (currentPlayer){
         toggleModal('#modalPlayer1');
         setTimeout(toggleModal,1500,'#modalPlayer1');

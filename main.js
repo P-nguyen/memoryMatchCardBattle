@@ -11,7 +11,11 @@ var attempt_counter = 0;
 var games_played = 0;
 
 var currentPlayer = true; //true is player 1
-var screenClickable = true;
+var screenClickable = false; // player notificatin will turn this into true. for player 1.
+
+var player1 = new Player('Player 1', '#player1');
+var player2 = new Player('Player 2', '#player2');
+var totalPlayers = [player1,player2];
 
 function initiateGame() {
     addEventHandler();
@@ -38,7 +42,7 @@ function randomizeCardOrderArr(){
 }
 
 function addImageAddressToCard() {
-    var cards = $('.card > .back');
+    var cards = $('.game-area .card > .back');
     for (var i = 0; i< cards.length; i++) {
         $(cards[i]).attr('src', cardName[cardOrder[i]].address)//<img>
     }
@@ -102,7 +106,13 @@ function flipCardToFront() {
     }else{
         console.log('you clicked this already!');
     }
-    //display_stats(); //?
+    updatePlayerStats();
+}
+
+function updatePlayerStats(){
+    for (var i = 0; i < 2; i++){
+        totalPlayers[i].updateStatDisplay();
+    }
 }
 
 function display_stats(){
@@ -206,8 +216,9 @@ function checkCardName(_inputImageSrc){
     return cardName;
 }
 
-function checkCardAbility(_cardName) {
+function activateCardAbility(_cardName) {
 
+    cardName[_cardName].ability();
     // switch(cardName){
 //     case 'attack':
 //         //

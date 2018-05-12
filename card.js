@@ -8,13 +8,19 @@ var cardName = {
         effect: 0,
         storedCard: ''},
     heal: {name: 'heal',
-        address:'images/Cards/healCard.jpg' ,
+        address:'images/Cards/healCard.jpg',
         effect: 1,//how much it heals
         storedCard: ''},
     bahamut: {name: 'bahamut',
-        address:'images/Cards/bahamutCard.jpg' ,
+        address:'images/Cards/bahamutCard.jpg',
         effect: 1,
-        storedCard: ''},
+        ability: function(){
+            //damage both players.
+            for (var i = 0; i < 2; i++){
+                totalPlayers[i].health -= this.effect;
+            }
+            setTimeout(resetDeck, 2000);
+        }},
     doubleStrike: {name: 'doubleStrike',
         address: 'images/Cards/doubleStrikeCard.jpg',
         effect: 2,
@@ -25,17 +31,19 @@ var cardName = {
         storedCard: ''},
 };
 
-function Player( _name ) {
+function Player( _name , _playerPosString) {
     this.name = _name;
+    this.playerPos = _playerPosString;
     this.health = 10;
     this.cardHeld = null; //holds name of card
     this.cardAddress = null; //holds address of card
     this.currentAttackPower = 1;
 
-    this.updateDisplay = function(){
-        //this wil update health, current held card
+    this.updateStatDisplay = function(){
+        var healthSelector = _playerPosString+' .playerStat h3';
+        $(healthSelector).text(this.health);
     }
-    this.updateStats = function () {
+    this.updatePlayerStats = function () {
         //check if cardAbility has anything.
         this.cardAbility(this.cardHeld);
         //if so affect health or currentAttackPower

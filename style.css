@@ -72,13 +72,13 @@ li{
 }
 
 .row{
-
+    height: 33.33%;
     display: flex;
     justify-content: space-evenly;
 }
 .cardContainer{
-    height: 200px; /*fix this eventually*/
-    width: 115px;
+    height: 100%; /*fix this eventually*/
+    width: 20%;
     display: inline-block;
     perspective: 1000px;
 }
@@ -90,13 +90,14 @@ li{
     left: 10%;
 }
 
-.card:hover {
+.cardContainer .card:hover {
     transform: scale(1.2);
 }
 .back, .front {
     position: absolute;
     height: 100%;
     width: 100%;
+    left: 0;
     border-radius: 10px;
     border-style: solid;
     border-width: thin;
@@ -111,7 +112,7 @@ li{
     transform: rotateY(180deg);/*flip at beginning so when triggered it will flip correctly by flipper*/
 }
 
-.card.revealed.flipper{
+.card.revealed.flipper, .playerCardPlacement .card.revealed.flipper{
     transform: rotateY(180deg)/* once reveal is added to card it will trigger this and flip it*/
 }
 
@@ -169,17 +170,15 @@ h4{
     height: 40%;
 }
 .cardHolder{
-    height: 50%;
+    height: 60%;
     width: 100%;
+    text-align: center;
 }
-
 
 .playerCardPlacement{
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 90%;
-    width: 70%;
+    height: 100%;
+    width: 100%;
     background-color: black;
-    border-radius: 5%;
+    perspective: 1000px;
 }

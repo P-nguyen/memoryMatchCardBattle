@@ -3,15 +3,17 @@ $().ready(initiateGame);
 //global variables
 var first_card_clicked =null;
 var second_card_clicked = null;
-var cardOrder = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8];
+var cardOrder = ['attack','attack','shield','bahamut','doubleStrike','tripleStrike','heal','doubleStrike','tripleStrike'];
 var total_possible_matches = cardOrder.length/2;//number of total possible matches (in this case 2)
 var match_counter = 0;
 var attempt_counter = 0;
 var games_played = 0;
+var currentPlayer = true; //true is player 1
 
 function initiateGame() {
     addEventHandler();
     addImageAddressToCard();
+    currentPlayerPositionNotification();
 }
 
 function addEventHandler() {
@@ -40,10 +42,7 @@ function addImageAddressToCard() {
 }
 
 function flipCardToFront() {
-    //if both cards 'flipped' property is true, then get outta here.
-    //false means the cardback is showing.
-    //debugger;
-    //_jQueryelement.hasClass('revealed')
+    var cardType = null;
     if (first_card_clicked != null && second_card_clicked != null){
         if (first_card_clicked.hasClass('revealed') === true && second_card_clicked.hasClass('revealed') === true){
             console.log('exiting!')
@@ -53,8 +52,24 @@ function flipCardToFront() {
 
     var currentCard = $(this);
     if (first_card_clicked === null && currentCard.hasClass('revealed')=== false){
-        first_card_clicked = currentCard;
         currentCard.addClass('revealed'); // reveal the current card by adding class.
+        // here we check card ability
+        cardType = checkCardName($(currentCard).find('img').attr('src'));
+        if (cardType != 'attack') {
+
+            if(cardType === 'bahamut'){
+                console.log('ITs BAHAMUT!');
+                setTimeout(resetDeck, 2000);
+                //do damange to both players
+            }
+            //if its bahamut reset deck., if it can be stored it will be.
+            setTimeout(displayCard, 1000, $(currentCard).find('img').attr('src'));
+
+            return
+        }
+            //else if attack move on.
+        first_card_clicked = currentCard;
+
     }else if (currentCard.hasClass('revealed')=== false){
         second_card_clicked = currentCard;
         currentCard.addClass('revealed'); // reveal the current card by adding class.
@@ -62,15 +77,28 @@ function flipCardToFront() {
 
         if ($(first_card_clicked).find('img').attr('src') === $(second_card_clicked).find('img').attr('src')){
             match_counter++;
-            resetFirstandSecondCardVar();
-            checkWinCondition();
+
+            setTimeout(displayCard, 1000, $(first_card_clicked).find('img').attr('src'));// ('#cardModal');
+            //this is for attack only
+            //do attack damage. to target player.
+            setTimeout(resetDeck, 2000); // at 2000ms is when the player notification will be called. when that happens reset deck.
+
         }else{
+            //flip both cards back.
             setTimeout(flipCardToBack, 1000, first_card_clicked, second_card_clicked);
+            //check for bahamut
+            cardType = checkCardName($(currentCard).find('img').attr('src'));
+            if (cardType === 'bahamut') {
+                console.log('ITS BAHAMUT');
+                //reset deck.
+                setTimeout(resetDeck, 2000);
+            }
+
         }
     }else{
         console.log('you clicked this already!');
     }
-    display_stats();
+    //display_stats(); //?
 }
 
 function display_stats(){
@@ -98,11 +126,6 @@ function flipCardToBack(jQueryElement1,jQueryElement2) {
     resetFirstandSecondCardVar();
 }
 
-function resetFirstandSecondCardVar() {
-    first_card_clicked = null;
-    second_card_clicked = null;
-}
-
 function checkWinCondition() {
     if (match_counter===total_possible_matches){
         console.log('WINNER WINNER CHICKEN DINNER');
@@ -110,18 +133,22 @@ function checkWinCondition() {
 }
 
 function resetGame() {
-    reset_stats();
-    display_stats();
+    //reset_stats();
+    //display_stats();
     games_played++;
-    $('.games-played .value').text(games_played);
+    //$('.games-played .value').text(games_played);
 
     //reset game.
+    resetDeck()
+    
+}
+
+function resetDeck(){
     //flip all cards
     flipAllCardsOver();
     //randomize all cards
     randomizeCardOrderArr();
     setTimeout(addImageAddressToCard, 300);
-    
 }
 
 function flipAllCardsOver(){
@@ -129,5 +156,60 @@ function flipAllCardsOver(){
     for (var i = 0; i < allCards.length; i++){
         $(allCards[i]).removeClass('revealed');
     }
+}
+
+function resetFirstandSecondCardVar() {
+    first_card_clicked = null;
+    second_card_clicked = null;
+    currentPlayer = !currentPlayer;
+    currentPlayerPositionNotification(); // this will notify who should pick next.
+}
+
+function displayCard(_inputCardSrc){
+    $('#imgCardModal').attr('src', _inputCardSrc);
+    toggleModal('#cardModal')
+    setTimeout(toggleModal, 1500,'#cardModal'); //un toggle modal
+    setTimeout(resetFirstandSecondCardVar,2000); // gives a sec before announcing player turn
 
 }
+
+function currentPlayerPositionNotification(){
+    if (currentPlayer){
+        toggleModal('#modalPlayer1');
+        setTimeout(toggleModal,1500,'#modalPlayer1');
+    }else{
+        toggleModal('#modalPlayer2');
+        setTimeout(toggleModal,1500,'#modalPlayer2');
+    }
+}
+
+function toggleModal( _string ) {
+    var display = $(_string).css('display');
+    if (display === 'none'){
+        $(_string).show();
+    }else{
+        $(_string).hide();
+    }
+}
+
+function checkCardName(_inputImageSrc){
+    // input img src as a string
+    // return's string with no file location and .jpg
+    var stringArray = _inputImageSrc.split('/')[2];
+    var cardName = stringArray.split('C')[0];
+    return cardName;
+}
+
+function checkCardAbility(_cardName) {
+
+    // switch(cardName){
+//     case 'attack':
+//         //
+//         break;
+//     case 'bahamut':
+//         //damage everyone
+//         break;
+// }
+
+}
+

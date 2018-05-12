@@ -22,25 +22,37 @@
             </nav>
         </header>
 
-        <div id="Stats" class="gutter">
-            <h3>Stats:</h3>
-            <div class="games-played">
-                <p class="label">Games Played</p>
-                <p class="value">0</p>
+        <!--<div id="Stats" class="gutter">-->
+            <!--<h3>Stats:</h3>-->
+            <!--<div class="games-played">-->
+                <!--<p class="label">Games Played</p>-->
+                <!--<p class="value">0</p>-->
+            <!--</div>-->
+            <!--<div class="attempts">-->
+                <!--<p class="label">Attempts</p>-->
+                <!--<p class="value">0</p>-->
+            <!--</div>-->
+            <!--<div class="accuracy">-->
+                <!--<p class="label">Accuracy</p>-->
+                <!--<p class="value">0.00%</p>-->
+            <!--</div>-->
+            <!--<div class="matches">-->
+                <!--<p class="label">Matches</p>-->
+                <!--<p class="value">0</p>-->
+            <!--</div>-->
+            <!--<button class="reset">Reset Game</button>-->
+        <!--</div>-->
+        <div id="player1" class="gutter playerInfo">
+            <div class="playerStat">
+                <h1>player1</h1>
+                <h2>Health</h2>
+                <h3>10</h3>
             </div>
-            <div class="attempts">
-                <p class="label">Attempts</p>
-                <p class="value">0</p>
+            <div class="cardHolder">
+                <div class="playerCardPlacement">
+                     <img>
+                </div>
             </div>
-            <div class="accuracy">
-                <p class="label">Accuracy</p>
-                <p class="value">0.00%</p>
-            </div>
-            <div class="matches">
-                <p class="label">Matches</p>
-                <p class="value">0</p>
-            </div>
-            <button class="reset">Reset Game</button>
         </div>
 
         <div class="game-area">
@@ -63,6 +75,8 @@
                         <div class="front">yay</div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="cardContainer">
                     <div class="card flipper">
                         <img class="back">yay</img>
@@ -101,67 +115,28 @@
                         <div class="front">yay</div>
                     </div>
                 </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
             </div>
-            <div class="row">
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-                <div class="cardContainer">
-                    <div class="card flipper">
-                        <img class="back">yay</img>
-                        <div class="front">yay</div>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
-        <div class="gutter">
+        <div id="player2" class="gutter">
             <h1>player2</h1>
+        </div>
+
+        <div id="modalPlayer1" class="modal">
+            <div class="modal-content">
+                <h4>Player 1 Pick</h4>
+            </div>
+        </div>
+        <div id="modalPlayer2" class="modal">
+            <div class="modal-content">
+                <h4>Player 2 Pick</h4>
+            </div>
+        </div>
+        <div id="cardModal" class="modal">
+            <div class="modal-content">
+                <img id="imgCardModal">
+            </div>
         </div>
     </body>
 </html>

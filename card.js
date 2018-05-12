@@ -1,38 +1,62 @@
 var cardName = {
-    0: {name: 'attack',
-        address:'images/Cards/AttackCard.jpg',
-        effect: '',
+    attack: {name: 'attack',
+        address:'images/Cards/attackCard.jpg',
+        effect: 1,
         storedCard: ''},
-    1: {name: 'shield',
-        address:'images/Cards/ShieldCard.jpg' ,
-        effect: '',
+    shield: {name: 'shield',
+        address:'images/Cards/shieldCard.jpg' ,
+        effect: 0,
         storedCard: ''},
-    2: {name: 'heal',
-        address:'images/Cards/HealCard.jpg' ,
-        effect: '',
+    heal: {name: 'heal',
+        address:'images/Cards/healCard.jpg' ,
+        effect: 1,//how much it heals
         storedCard: ''},
-    3: {name: 'bahamut',
-        address:'images/Cards/BahamutCard.jpg' ,
-        effect: '',
+    bahamut: {name: 'bahamut',
+        address:'images/Cards/bahamutCard.jpg' ,
+        effect: 1,
         storedCard: ''},
-    4: {name: 'doubleStrike',
-        address: 'images/Cards/DoubleStrikeCard.jpg',
-        effect: '',
+    doubleStrike: {name: 'doubleStrike',
+        address: 'images/Cards/doubleStrikeCard.jpg',
+        effect: 2,
         storedCard: ''},
-    5: {name: 'tripleStrike',
-        address: 'images/Cards/TripleStrikeCard.jpg',
-        effect: '',
-        storedCard: ''},
-    6: {name: 'terra2',
-        address: 'images/Cards/AttackCard.jpg',
-        effect: '',
-        storedCard: ''},
-    7: {name: 'ramuth',
-        address: 'images/Cards/AttackCard.jpg',
-        effect: '',
-        storedCard: ''},
-    8: {name: 'odin',
-        address: 'images/Cards/AttackCard.jpg',
-        effect: '',
+    tripleStrike: {name: 'tripleStrike',
+        address: 'images/Cards/tripleStrikeCard.jpg',
+        effect: 3,
         storedCard: ''},
 };
+
+function Player( _name ) {
+    this.name = _name;
+    this.health = 10;
+    this.cardHeld = null; //holds name of card
+    this.cardAddress = null; //holds address of card
+    this.currentAttackPower = 1;
+
+    this.updateDisplay = function(){
+        //this wil update health, current held card
+    }
+    this.updateStats = function () {
+        //check if cardAbility has anything.
+        this.cardAbility(this.cardHeld);
+        //if so affect health or currentAttackPower
+    }
+    this.resetCard_Atk = function () {
+        this.cardHeld = null;
+        this.cardAddress = null;
+        this.currentAttackPower = 1;
+    }
+    this.attackPerson = function(target){ //attack other person.
+
+        //check if person has a shield.
+        //if not:
+            //target.health -= 1;
+        //if does:
+            //return and do nothing.
+    }
+
+}
+
+Player.prototype.cardAbility = function (_cardName) {
+    //this will check the card in a switch statment
+    console.log(_cardName)
+}

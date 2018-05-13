@@ -4,19 +4,17 @@ body{
     background-size: cover;
 }
 
-.game-logo{
-    height: 85%;
-    width: 100px;
-    background-color: white;
-    position: absolute;
-}
-
 header{
     height: 15vh;
-    background-color: black;
-    color: white;
     padding: 10px;
     position: relative;
+}
+
+header img{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 15vh;
 }
 
 h1{
@@ -29,7 +27,7 @@ h3{
 }
 
 a{
-    color: white;
+    color: black;
     text-decoration: unset;
 }
 
@@ -41,27 +39,41 @@ nav{
 }
 
 ul{
-    width: 500px;
-    margin: auto;
     text-align: center;
-    padding: 0;
+    position: absolute;
+    bottom: 0px;
+    width: 20%;
+    margin: auto;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 li{
     font-size: 1rem;
     display: inline-block;
-    width: 100px;
+    width: 87px;
+    height: 21px;
+    background-color: lightgrey;
+    margin-right: 10px;
 
+}
+button{
+    background-color: lightgrey;
+    border-width: 0;
+    height: 21px;
 }
 
 .gutter{
     color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    border: 3px solid darkgrey;
+    background: linear-gradient(to bottom right, rgba(0,0,170,0.75), rgba(0,0,40,0.75));
     text-align: center;
     width: 20%;
     height: 85vh;
     display: inline-block;
     vertical-align: top;
-    background-color: rgba(255,255,255,.25);
 }
 
 .game-area{
@@ -179,6 +191,5 @@ h4{
     position: relative;
     height: 100%;
     width: 100%;
-    background-color: black;
     perspective: 1000px;
 }

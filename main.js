@@ -15,10 +15,19 @@ var targetPlayer;
 var currentPlayer;
 var playerDeath = false;
 
+var backgroundMusic = new Audio("audio/Ayako Saso_Painful Battle.mp3");
+
+function playBackgroundMusic(){
+    backgroundMusic.loop = true;
+    backgroundMusic.autoplay = true;
+}
+
+
 function initiateGame() {
     addEventHandler();
     addImageAddressToCard();
     currentPlayerPositionNotification();
+    playBackgroundMusic();
 }
 
 function addEventHandler() {
@@ -64,7 +73,7 @@ function flipCardToFront() {
         if (cardType != 'attack') {
             screenClickable = !screenClickable;
             activateCardAbility(cardType);
-            setTimeout(displayCard, 1000, $(currentCard).find('img').attr('src')); //this will display a card.
+            setTimeout(displayCard, 500, $(currentCard).find('img').attr('src')); //this will display a card.
             return
         }
         first_card_clicked = currentCard;
@@ -78,7 +87,7 @@ function flipCardToFront() {
             //really a check to see if attack matches.
             activateCardAbility(cardType);
             resetPlayerAbilitys(); //round is over reset abilities.
-            setTimeout(displayCard, 1000, $(first_card_clicked).find('img').attr('src'));// ('#cardModal');
+            setTimeout(displayCard, 500, $(first_card_clicked).find('img').attr('src'));// ('#cardModal');
             //this is for attack only
             //do attack damage. to target player.
             setTimeout(resetDeck, 2000); // at 2000ms is when the player notification will be called. when that happens reset deck.
@@ -87,7 +96,7 @@ function flipCardToFront() {
             cardType = checkCardName($(currentCard).find('img').attr('src'));
             if (cardType === 'bahamut') {
                 activateCardAbility(cardType);
-                setTimeout(displayCard, 1000, $(currentCard).find('img').attr('src')); //this will display a card.
+                setTimeout(displayCard, 500, $(currentCard).find('img').attr('src')); //this will display a card.
             }else{
                 setTimeout(flipCardToBack, 1000, first_card_clicked, second_card_clicked);
             }
@@ -142,6 +151,10 @@ function displayCard(_inputCardSrc){
     toggleModal('#cardModal')
     setTimeout(toggleModal, 1500,'#cardModal'); //un toggle modal
 
+    //this finds card name so we can call the sound via card.
+    var cardType = checkCardName(_inputCardSrc);
+    cardName[cardType].sound();
+
     updatePlayerStats(); // this updates player stats at the end of each attack or display
     if(playerDeath === true){
         //set winner modal
@@ -195,7 +208,6 @@ function resetPlayerAbilitys(){
     for (var i = 0; i < 2; i++){
         totalPlayers[i].resetPlayerStats();
     }
-    //flip over player held cards
 }
 
 function toggleModal( _string ) {

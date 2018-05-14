@@ -4,11 +4,13 @@ var cardName = {
         effect: 1,
         ability: function () {
             if ( targetPlayer.cardHeld == 'shield'){
-                //playshield noise
+                setTimeout(audioShield.play,1000);
             }else{
                 targetPlayer.health -= currentPlayer.currentAttackPower;
-                //play hurt noise
             }
+        },
+        sound: function () {
+            audioSword.play();
         }},
     shield: {name: 'shield',
         address:'images/Cards/shieldCard.jpg' ,
@@ -17,16 +19,23 @@ var cardName = {
             currentPlayer.cardHeld = 'shield';
             playerHeldCardEquipped( this.address );
             //play shield equip noise.
+        },
+        sound: function () {
+            audioShield.play();
         }},
     heal: {name: 'heal',
         address:'images/Cards/healCard.jpg',
-        effect: 1,//how much it heals
+        effect: 2,//how much it heals
         ability: function () {
             currentPlayer.health += this.effect;
+            //heal noise
+        },
+        sound: function () {
+            audioHeal.play();
         }},
     bahamut: {name: 'bahamut',
         address:'images/Cards/bahamutCard.jpg',
-        effect: 3,
+        effect: 2,
         ability: function(){
             //damage both players.
             for (var i = 0; i < 2; i++){
@@ -34,6 +43,9 @@ var cardName = {
             }
             setTimeout(resetDeck, 2000);
             resetPlayerAbilitys();
+        },
+        sound: function () {
+            audioBahamut.play();
         }},
     doubleStrike: {name: 'doubleStrike',
         address: 'images/Cards/doubleStrikeCard.jpg',
@@ -42,8 +54,9 @@ var cardName = {
             currentPlayer.cardHeld = 'doubleStrike';
             currentPlayer.currentAttackPower *= this.effect;
             playerHeldCardEquipped( this.address );
-
-            //play sound of strength
+        },
+        sound: function () {
+            audioDblStrike.play();
         }},
     tripleStrike: {name: 'tripleStrike',
         address: 'images/Cards/tripleStrikeCard.jpg',
@@ -52,11 +65,18 @@ var cardName = {
             currentPlayer.cardHeld = 'tripleStrike';
             currentPlayer.currentAttackPower *= this.effect;
             playerHeldCardEquipped( this.address );
-
-            //play sound of war.
-            //replace the card on field.
+        },
+        sound: function () {
+            audioTriStrike.play();
         }},
 };
+
+var audioSword =  new Audio('audio/sword.mp3');
+var audioShield =  new Audio('audio/shield.mp3');
+var audioHeal =  new Audio('audio/heal.mp3');
+var audioBahamut =  new Audio('audio/bahamut.mp3');
+var audioDblStrike =  new Audio('audio/dblStrike.mp3');
+var audioTriStrike =  new Audio('audio/triStrike.mp3');
 
 function Player( _name , _playerPosString) {
     this.name = _name;

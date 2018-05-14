@@ -3,8 +3,9 @@ var cardName = {
         address:'images/Cards/attackCard.jpg',
         effect: 1,
         ability: function () {
-            if ( targetPlayer.cardHeld == 'shield'){
-                setTimeout(audioShield.play,1000);
+            debugger;
+            if ( targetPlayer.cardHeld === 'shield'){
+                setTimeout(cardName.shield.sound,1000);
             }else{
                 targetPlayer.health -= currentPlayer.currentAttackPower;
             }
@@ -49,10 +50,10 @@ var cardName = {
         }},
     doubleStrike: {name: 'doubleStrike',
         address: 'images/Cards/doubleStrikeCard.jpg',
-        effect: 2,
+        effect: 4,
         ability: function () {
             currentPlayer.cardHeld = 'doubleStrike';
-            currentPlayer.currentAttackPower *= this.effect;
+            currentPlayer.currentAttackPower = this.effect;
             playerHeldCardEquipped( this.address );
         },
         sound: function () {
@@ -60,10 +61,10 @@ var cardName = {
         }},
     tripleStrike: {name: 'tripleStrike',
         address: 'images/Cards/tripleStrikeCard.jpg',
-        effect: 3,
+        effect: 6,
         ability: function () {
             currentPlayer.cardHeld = 'tripleStrike';
-            currentPlayer.currentAttackPower *= this.effect;
+            currentPlayer.currentAttackPower = this.effect;
             playerHeldCardEquipped( this.address );
         },
         sound: function () {
@@ -83,7 +84,6 @@ function Player( _name , _playerPosString) {
     this.playerPos = _playerPosString;
     this.health = 10;
     this.cardHeld = null; //holds name of card
-    this.cardAddress = null; //holds address of card // remove this?
     this.currentAttackPower = 2;
 
     this.updateStatDisplay = function(){
@@ -95,7 +95,6 @@ function Player( _name , _playerPosString) {
     }
     this.resetPlayerStats = function () {
         this.cardHeld = null;
-        this.cardAddress = null;
         this.currentAttackPower = 2;
     }
     this.resetPlayerHealth = function (){
@@ -106,7 +105,6 @@ function Player( _name , _playerPosString) {
 function playerHeldCardEquipped( _imgAddress ){
     //if card has revealed.
     //then unreveal wait and reveal again.
-
     var cardSlotElement = currentPlayer.playerPos + ' .card > .back';
     $(cardSlotElement).attr('src', _imgAddress);
     var cardSelector = currentPlayer.playerPos + ' .card'

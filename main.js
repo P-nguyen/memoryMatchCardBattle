@@ -19,8 +19,6 @@ var backgroundMusic = new Audio("audio/Ayako Saso_Painful Battle.mp3");
 backgroundMusic.loop = true;
 backgroundMusic.autoplay = true;
 
-
-
 function initiateGame() {
     addEventHandler();
     randomizeCardOrderArr();
@@ -38,7 +36,6 @@ function startGameButton(){
     $('#introModal').hide();
     backgroundMusic.play();
     currentPlayerPositionNotification();
-
 }
 
 function randomizeCardOrderArr(){
@@ -67,7 +64,6 @@ function flipCardToFront() {
     if (!screenClickable){ // if false then exit// it starts true.
         return;
     }
-
 
     var currentCard = $(this);
     cardType = checkCardName($(currentCard).find('img').attr('src'));
@@ -123,7 +119,6 @@ function resetGame() {
     playerDeath = false;
     resetFirstandSecondCardVar();
     updatePlayerStats();
-    
 }
 
 function resetDeck(){
@@ -164,12 +159,11 @@ function displayCard(_inputCardSrc){
         return;
     }
     setTimeout(resetFirstandSecondCardVar,2000); // gives a sec before announcing player turn
-
 }
 
 function announceWinner() {
-    // check who died.
-    //show modal.
+    //check who died.
+    //show winner modal.
     //time out modal and reset game.
     if (player1.health <= 0 && player2.health <=0){
         $('#winnerModalName').text('Its a tie!');

@@ -39,28 +39,37 @@ nav{
 }
 
 ul{
-    text-align: center;
+    list-style-type: none;
+    font-size: 1rem;
+    text-align: right;
+    font-family: Arial;
     position: absolute;
-    bottom: 0px;
+    right: 0px;
     width: 20%;
-    margin: auto;
+    margin: 0;
     padding: 10px;
     box-sizing: border-box;
 }
 
 li{
-    font-size: 1rem;
-    display: inline-block;
-    width: 87px;
-    height: 21px;
-    background-color: lightgrey;
+    position: relative;
+    background-color: white;
     margin-right: 10px;
 
 }
 button{
-    background-color: lightgrey;
+    font-size: 1rem;
+    background-color: white;
     border-width: 0;
     height: 21px;
+}
+
+button:hover, li:hover{
+    color: red;
+}
+
+.strikeThrough{
+    text-decoration: line-through;
 }
 
 .gutter{
@@ -192,4 +201,32 @@ h4{
     height: 100%;
     width: 100%;
     perspective: 1000px;
+}
+
+#introModal{
+    display: block;
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(255,255,255);
+    text-align: center;
+}
+#tutorialImg{
+    width: 100%;
+    margin-bottom: 5%;
+}
+
+#introStartButton{
+    height: 50px;
+    width: 160px;
+    border-color: black;
+    border-radius: 10px;
+    border-width: 3px;
+    font-family: inherit;
+    font-weight: bold;
+    color: black;
+    letter-spacing: 2px;
 }

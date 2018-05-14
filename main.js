@@ -16,23 +16,29 @@ var currentPlayer;
 var playerDeath = false;
 
 var backgroundMusic = new Audio("audio/Ayako Saso_Painful Battle.mp3");
+backgroundMusic.loop = true;
+backgroundMusic.autoplay = true;
 
-function playBackgroundMusic(){
-    backgroundMusic.loop = true;
-    backgroundMusic.autoplay = true;
-}
 
 
 function initiateGame() {
     addEventHandler();
+    randomizeCardOrderArr();
     addImageAddressToCard();
     currentPlayerPositionNotification();
-    playBackgroundMusic();
+
 }
 
 function addEventHandler() {
     $('.game-area').on('click', '.card', flipCardToFront);
     $('#reset').on('click', resetGame);
+    $('#toggleMusic').on('click', backgroundMusicButton);
+    $('#introStartButton').on('click', startGameButton);
+}
+
+function startGameButton(){
+    $('#introModal').hide();
+    backgroundMusic.play();
 }
 
 function randomizeCardOrderArr(){
@@ -59,7 +65,6 @@ function flipCardToFront() {
     var cardType = null;
 
     if (!screenClickable){ // if false then exit// it starts true.
-        console.log('exiting!')
         return;
     }
 
@@ -101,10 +106,7 @@ function flipCardToFront() {
                 setTimeout(flipCardToBack, 1000, first_card_clicked, second_card_clicked);
             }
         }
-    }else{
-        console.log('you clicked this already!');
     }
-
 }
 
 function flipCardToBack(jQueryElement1,jQueryElement2) {
@@ -198,7 +200,6 @@ function currentPlayerPositionNotification(){
 }
 
 function updatePlayerStats(){
-    console.log('updatePlayer stats ran!');
     for (var i = 0; i < 2; i++){
         totalPlayers[i].updateStatDisplay();
     }
@@ -231,3 +232,12 @@ function activateCardAbility(_cardName) {
     cardName[_cardName].ability(); // simpliy calls card ability.
 }
 
+function backgroundMusicButton() {
+    $('#toggleMusic').toggleClass('strikeThrough');
+    debugger;
+    if(backgroundMusic.paused){
+        backgroundMusic.play()
+    }else{
+        backgroundMusic.pause();
+    }
+}

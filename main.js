@@ -25,8 +25,6 @@ function initiateGame() {
     addEventHandler();
     randomizeCardOrderArr();
     addImageAddressToCard();
-    currentPlayerPositionNotification();
-
 }
 
 function addEventHandler() {
@@ -39,6 +37,8 @@ function addEventHandler() {
 function startGameButton(){
     $('#introModal').hide();
     backgroundMusic.play();
+    currentPlayerPositionNotification();
+
 }
 
 function randomizeCardOrderArr(){
@@ -190,11 +190,15 @@ function currentPlayerPositionNotification(){
         targetPlayer = player2;
         currentPlayer = player1;
         toggleModal('#modalPlayer1');
+        $('#player1 h1').addClass('underLineText');
+        $('#player2 h1').removeClass('underLineText');
         setTimeout(toggleModal,1500,'#modalPlayer1');
     }else{
         targetPlayer = player1;
         currentPlayer = player2;
         toggleModal('#modalPlayer2');
+        $('#player2 h1').addClass('underLineText');
+        $('#player1 h1').removeClass('underLineText');
         setTimeout(toggleModal,1500,'#modalPlayer2');
     }
 }

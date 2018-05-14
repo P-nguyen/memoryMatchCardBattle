@@ -71,6 +71,12 @@ button:hover, li:hover{
     text-decoration: line-through;
 }
 
+.underLineText{
+    text-decoration: underline;
+    text-decoration-style: double;
+    text-decoration-color: yellow;
+}
+
 .gutter{
     color: white;
     border-radius: 10px;
@@ -79,7 +85,7 @@ button:hover, li:hover{
     background: linear-gradient(to bottom right, rgba(0,0,170,0.75), rgba(0,0,40,0.75));
     text-align: center;
     width: 20%;
-    height: 85vh;
+    height: 82vh;
     display: inline-block;
     vertical-align: top;
 }
@@ -87,8 +93,7 @@ button:hover, li:hover{
 .game-area{
     display: inline-block;
     width: 60%;
-    height: 85vh;
-    #background-color: #fffabe;
+    height: 82vh;
 }
 
 .row{
@@ -184,7 +189,7 @@ h4{
     font-size: 1.5rem;
 }
 .playerInfo h3{
-    font-size: 2rem;
+    font-size: 3rem;
 }
 .playerStat{
     height: 40%;

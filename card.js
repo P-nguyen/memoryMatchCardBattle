@@ -1,6 +1,6 @@
 var cardName = {
     attack: {name: 'attack',
-        address:'images/Cards/attackCard.jpg',
+        address:'images/cards/attackCard.jpg',
         effect: 1,
         ability: function () {
             debugger;
@@ -14,7 +14,7 @@ var cardName = {
             audioSword.play();
         }},
     shield: {name: 'shield',
-        address:'images/Cards/shieldCard.jpg' ,
+        address:'images/cards/shieldCard.jpg' ,
         effect: 0,
         ability: function () {
             currentPlayer.cardHeld = 'shield';
@@ -25,7 +25,7 @@ var cardName = {
             audioShield.play();
         }},
     heal: {name: 'heal',
-        address:'images/Cards/healCard.jpg',
+        address:'images/cards/healCard.jpg',
         effect: 2,//how much it heals
         ability: function () {
             currentPlayer.health += this.effect;
@@ -35,7 +35,7 @@ var cardName = {
             audioHeal.play();
         }},
     bahamut: {name: 'bahamut',
-        address:'images/Cards/bahamutCard.jpg',
+        address:'images/cards/bahamutCard.jpg',
         effect: 2,
         ability: function(){
             //damage both players.
@@ -49,7 +49,7 @@ var cardName = {
             audioBahamut.play();
         }},
     doubleStrike: {name: 'doubleStrike',
-        address: 'images/Cards/doubleStrikeCard.jpg',
+        address: 'images/cards/doubleStrikeCard.jpg',
         effect: 4,
         ability: function () {
             currentPlayer.cardHeld = 'doubleStrike';
@@ -60,7 +60,7 @@ var cardName = {
             audioDblStrike.play();
         }},
     tripleStrike: {name: 'tripleStrike',
-        address: 'images/Cards/tripleStrikeCard.jpg',
+        address: 'images/cards/tripleStrikeCard.jpg',
         effect: 6,
         ability: function () {
             currentPlayer.cardHeld = 'tripleStrike';
@@ -105,8 +105,8 @@ function Player( _name , _playerPosString) {
 function playerHeldCardEquipped( _imgAddress ){
     //if card has revealed.
     //then unreveal wait and reveal again.
-    var cardSlotElement = currentPlayer.playerPos + ' .card > .back';
-    $(cardSlotElement).attr('src', _imgAddress);
-    var cardSelector = currentPlayer.playerPos + ' .card'
-    $(cardSelector).addClass('revealed');
+    var cardslotElement = currentPlayer.playerPos + ' .card > .back';
+    $(cardslotElement).attr('src', _imgAddress);
+    var cardselector = currentPlayer.playerPos + ' .card'
+    $(cardselector).addClass('revealed');
 }
